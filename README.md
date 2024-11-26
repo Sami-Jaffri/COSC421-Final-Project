@@ -29,10 +29,10 @@ While these efforts advanced scientific understanding, they were not tailored fo
 ## 3. Our Approach
 
 ### How did we solve it?  
-We leveraged network science to analyze relationships between drugs, diseases, and side effects. By constructing a graph-based model, we provided a tool for visualizing these relationships and ranking treatment options based on a weighted effectiveness score derived from user reviews.
+We used network science to analyze relationships between drugs, diseases, and side effects. By constructing a graphic model, we provided a tool for visualizing these relationships and ranking treatment options based on a weighted effectiveness score derived from user reviews.
 
 ### What data did we use, and where did it come from?  
-We analyzed a dataset containing over 3,500 drugs, their associated diseases, and common side effects. The data was sourced from publicly available platforms such as Kaggle. We processed and merged multiple datasets to establish a comprehensive, structured resource for analysis.
+We analyzed a dataset containing over 3,500 drugs, their associated diseases, and common side effects. The data was sourced from public platforms such as Kaggle. We processed and merged multiple datasets to establish a comprehensive, structured resource for analysis.
 
 ---
 
