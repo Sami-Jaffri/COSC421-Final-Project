@@ -20,12 +20,12 @@ Once the page has loaded, click on the **"Load Graph"** button to begin the proc
 ![Step 2: Click Load Graph](Images/image2.png)
 
 ## 3. Upload the Data File
-# 3.1 
+### 3.1 
 Select the **CosmographData.csv** file located in the `DataFiles/Cosmograph` folder of this repository. Upload it into the app.
 
 ![Step 3.1: Upload the Data File](Images/image3.png)
 
-# 3.2
+### 3.2
 In the app:
 - Set the **Source** column to `drug_name`.
 - Set the **Target** columns to `medical_condition` and `side_effects`.
