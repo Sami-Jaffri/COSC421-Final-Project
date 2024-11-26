@@ -1,7 +1,7 @@
 # COSC 421 Final Project
-A Medical Analysis of Drugs and Side Effects using Network Science
+A Medical Analysis of Drugs and Side Effects using Network Science 
 
-# Medical Analysis of Drugs and Side Effects using Network Science
+# Medical Analysis of Drugs and Side Effects using Network Science - Brief Summary
 
 ## 1. Problem Statement
 
@@ -106,7 +106,8 @@ Network science provides a powerful framework for visualizing and analyzing the 
 
 - **Sami Jaffri**  
 - **Ryan Eveson**  
-- **Evan Pasenau**  
+- **Evan Pasenau**
+
 University of British Columbia, Kelowna, BC
 
 ---
