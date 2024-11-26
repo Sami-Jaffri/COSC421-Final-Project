@@ -19,10 +19,10 @@ While existing research in network science and medicine focuses on understanding
 
 ### What have others done to solve this (or a similar problem)?  
 Previous studies have used network science to model disease interactions (e.g., the diseasome) and explore drug repurposing opportunities by analyzing shared molecular pathways. For example:  
-- **Network Medicine**: Researchers like Barabási et al. used molecular networks to uncover comorbidities and shared genetic bases among diseases.  
+- **Network Medicine**: Researchers like Barabási used molecular networks to uncover comorbidities and shared genetic bases among diseases (diseasome).  
 - **Jaccard Coefficient Analysis**: Similarity metrics identified potential drug repurposing opportunities based on shared biological pathways.  
 
-While these efforts advanced scientific understanding, they were not tailored for direct patient or practitioner use.
+While these efforts advanced scientific understanding, they were not tailored for direct patient or practitioner use which is how we differ. Our research and our goal is to create a tool which can be understood easily to the average individual. Many people dont understand what drug they're using or how it's affecting them regardless of wheter or not a doctor had explained previously. 
 
 ---
 
