@@ -28,6 +28,7 @@ In the app:
 ![Step 3.1: Upload the Data File and Set Conditions](Images/image3.png)
 
 Results should look similiar to the following image. 
+
 ![Step 3.2: Set Source and Target Columns](Images/image4.png)
 
 ## 4. Interact with the Graph
