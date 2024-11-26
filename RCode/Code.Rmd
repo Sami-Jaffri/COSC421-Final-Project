@@ -4,7 +4,7 @@ library(tidyverse)
 ```
 
 ```{r}
-nodes1 <- read.csv("C:/Users/rbeve/OneDrive/Desktop/COSC 421/Final Project/drugs_side_effects_drugs_com.csv", header = TRUE)
+nodes1 <- read.csv("your_path_to_drugs_side_effects_csv_file", header = TRUE)
 
 nodes <- nodes1[nodes1$activity != '0%', ]
 nodes
