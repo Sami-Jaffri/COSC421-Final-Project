@@ -54,9 +54,7 @@ These graphs capture direct relationships and reveal hidden patterns, such as cl
 ### What type of analysis did we carry out?  
 We performed both structural and statistical analysis using network science methods:
 - **Weighted Effectiveness Score**:  
-  \[
-  \text{Score} = \text{User Rating} \times \log(1 + \text{Number of Reviews})
-  \]
+`Score = User Rating × log(1 + Number of Reviews)`
 - **Network Metrics Studied**:  
   - **Betweenness Centrality**: To identify critical drugs connecting multiple conditions.  
   - **Closeness Centrality**: To find drugs central to specific disease clusters.  
@@ -107,7 +105,7 @@ Network science provides a powerful framework for visualizing and analyzing the 
 - **Ryan Eveson**  
 - **Evan Pasenau**
 
-University of British Columbia, Kelowna, BC
+University of British Columbia, Kelowna BC
 
 ---
 
