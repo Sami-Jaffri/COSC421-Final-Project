@@ -36,20 +36,7 @@ We analyzed a dataset containing over 3,500 drugs, their associated diseases, an
 
 ---
 
-## 4. Network Formation
-
-### Describe the network(s) formed:  
-- **Type of Network**: Bipartite graphs.  
-- **Nodes**: Represent drugs and diseases (or side effects).  
-- **Edges**: Indicate relationships such as:
-  - A drug treating a specific disease.
-  - A drug causing a specific side effect.
-
-These graphs capture direct relationships and reveal hidden patterns, such as clusters of drugs with overlapping effects or conditions sharing similar treatment pathways.
-
----
-
-## 5. Data Analysis
+## 4. Data Analysis
 
 ### What type of analysis did we carry out?  
 We performed both structural and statistical analysis using network science methods:
@@ -62,7 +49,7 @@ We performed both structural and statistical analysis using network science meth
 
 ---
 
-## 6. Results
+## 5. Results
 
 ### What are your results?  
 1. **Insights into Side Effects**:  
@@ -77,7 +64,7 @@ We performed both structural and statistical analysis using network science meth
 
 ---
 
-## 7. Challenges and Fixes
+## 6. Challenges and Fixes
 
 ### What went wrong, and how did you fix it?  
 - **Issue**: Limited scope of side effects in the initial dataset.  
@@ -87,7 +74,7 @@ We performed both structural and statistical analysis using network science meth
 
 ---
 
-## 8. Main Takeaways and Future Directions
+## 7. Main Takeaways and Future Directions
 
 ### What is the main takeaway?  
 Network science provides a powerful framework for visualizing and analyzing the complex interplay of drugs, diseases, and side effects. By focusing on user-centric metrics like effectiveness scores, we can bridge the gap in medication literacy and empower informed decision-making.
@@ -96,16 +83,6 @@ Network science provides a powerful framework for visualizing and analyzing the 
 - Expand the dataset to include more rare side effects and conditions.  
 - Incorporate advanced machine learning techniques to predict drug effectiveness and side effect severity.  
 - Conduct a more robust validation study to assess the tool’s impact in clinical settings.
-
----
-
-## Contributors
-
-- **Sami Jaffri**  
-- **Ryan Eveson**  
-- **Evan Pasenau**
-
-University of British Columbia, Kelowna BC
 
 ---
 
