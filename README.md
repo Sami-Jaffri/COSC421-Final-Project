@@ -1,12 +1,48 @@
 # COSC 421 Final Project
 A Medical Analysis of Drugs and Side Effects using Network Science
 
-How to Use the Cosmograph Website
-Visit Cosmograph App.
-Click on the "Load Graph" button.
-Select the CosmographData.csv file located in the DataFiles/Cosmograph folder in this repository and upload it.
-Set the Source column to drug_name, and the Target columns to medical_condition and side_effects.
-Interact with the graph:
-Clicking on a pink node will display the disease.
-The nodes in the middle layer represent the drugs.
-The outer layer nodes of the cluster represent the side effects.
+# How to Use the Cosmograph Website
+
+Follow the steps below to explore the graph visualization on the Cosmograph website.
+
+## 1. Visit the Cosmograph App
+
+Go to the following link:
+
+[Cosmograph App](https://cosmograph.app/run/)
+
+![Step 1: Visit the Cosmograph App](path/to/your/image1.png)
+
+## 2. Click "Load Graph"
+
+Once the page has loaded, click on the **"Load Graph"** button to begin the process.
+
+![Step 2: Click Load Graph](path/to/your/image2.png)
+
+## 3. Upload the Data File
+
+Select the **CosmographData.csv** file located in the `DataFiles/Cosmograph` folder of this repository. Upload it into the app.
+
+![Step 3: Upload the Data File](path/to/your/image3.png)
+
+## 4. Set Source and Target Columns
+
+In the app:
+- Set the **Source** column to `drug_name`.
+- Set the **Target** columns to `medical_condition` and `side_effects`.
+
+![Step 4: Set Source and Target Columns](path/to/your/image4.png)
+
+## 5. Interact with the Graph
+
+You can now interact with the graph:
+- **Click on a pink node** to see the disease.
+- The **middle layer** nodes represent the drugs.
+- The **outer layer** nodes of the cluster represent the side effects.
+
+![Step 5: Interact with the Graph](path/to/your/image5.png)
+
+---
+
+Feel free to explore and visualize the relationships between drugs, medical conditions, and side effects!
+
