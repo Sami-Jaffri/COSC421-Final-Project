@@ -7,7 +7,7 @@ Follow the steps below to explore the graph visualization on the Cosmograph webs
 
 ## 1. Visit the Cosmograph App
 
-Go to the following link and select LAUNCH:
+Go to the following link and select Launch:
 
 [Cosmograph App](https://cosmograph.app)
 
