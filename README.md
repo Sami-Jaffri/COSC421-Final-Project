@@ -5,13 +5,13 @@
 ## 1. Problem Statement
 
 ### What problem did we solve?  
-Patients and healthcare professionals face challenges in understanding and optimizing the use of medications, particularly in balancing efficacy and minimizing side effects. With nearly 50% of patients failing to adhere to their prescribed medications due to poor health literacy and limited access to actionable insights, the lack of effective tools to streamline this decision-making process is a critical issue.
+Patients and doctors around the world face challenges in understanding and optimizing the use of medications, particularly in terms of balancing efficacy and minimizing side effects. With nearly 50% of patients failing to adhere to their prescribed medications due to poor health literacy and limited access to actionable insights, the lack of effective and easy to understand tools to streamline this decision-making process is a critical issue.
 
 ### Why is this problem important?  
-Non-adherence to medication significantly impacts public health, resulting in poor treatment outcomes and higher healthcare costs. Addressing this gap can empower patients to make informed decisions and enable healthcare professionals to tailor treatment plans that maximize benefits while minimizing harm.
+Non-adherence to medication significantly impacts public health, resulting in poor treatment outcomes. Addressing this gap can empower patients to make informed decisions and enable healthcare professionals to alter treatment plans that maximize benefits while minimizing harm, and taking into consideration patient preferences.
 
 ### Why is this novel?  
-While existing research in network science and medicine focuses on understanding disease mechanisms and molecular networks, few tools offer actionable insights by combining drug efficacy, side effects, and patient preferences. Our approach integrates user-generated data with network-based analysis to provide personalized recommendations.
+While existing research in network science and medicine focuses on understanding disease mechanisms and molecular networks, few tools offer insight by combining drugs, side effects, and patient preferences. Our approach integrates real human data with network-based analysis to provide recommendations.
 
 ---
 
