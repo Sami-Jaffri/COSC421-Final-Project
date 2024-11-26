@@ -1,5 +1,4 @@
-# COSC 421 Final Project
-A Medical Analysis of Drugs and Side Effects using Network Science 
+# COSC 421/521 Final Project
 
 # Medical Analysis of Drugs and Side Effects using Network Science - Brief Summary
 
