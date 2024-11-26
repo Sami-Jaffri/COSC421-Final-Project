@@ -1,0 +1,272 @@
+```{r}
+library(igraph)
+library(tidyverse)
+```
+
+```{r}
+nodes1 <- read.csv("C:/Users/rbeve/OneDrive/Desktop/COSC 421/Final Project/drugs_side_effects_drugs_com.csv", header = TRUE)
+
+nodes <- nodes1[nodes1$activity != '0%', ]
+nodes
+#hives
+nodes$contains_hives <- grepl("\\bhives\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect1 <- ifelse(nodes$contains_hives, "hives", NA)
+# swelling
+nodes$contains_swelling <- grepl("\\bswelling\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect <- ifelse(nodes$contains_swelling, "swelling", NA)
+# vomiting
+nodes$contains_vomiting <- grepl("\\bvomiting\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect3 <- ifelse(nodes$contains_vomiting, "vomiting", NA)
+# drowsiness
+nodes$contains_drowsiness <- grepl("\\bdrowsiness\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect5 <- ifelse(nodes$contains_drowsiness, "drowsiness", NA)
+# dizziness
+nodes$contains_dizziness <- grepl("\\bdizziness\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect6 <- ifelse(nodes$contains_dizziness, "dizziness", NA)
+# diarrhea
+nodes$contains_diarrhea <- grepl("\\bdiarrhea\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect7 <- ifelse(nodes$contains_diarrhea, "diarrhea", NA)
+# constipation
+nodes$contains_constipation <- grepl("\\bconstipation\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect8 <- ifelse(nodes$contains_constipation, "constipation", NA)
+# blurred vision
+nodes$contains_blurred_vision <- grepl("\\bblurred vision\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect9 <- ifelse(nodes$contains_blurred_vision, "blurred vision", NA)
+# fatigue
+nodes$contains_fatigue <- grepl("\\bfatigue\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect10 <- ifelse(nodes$contains_fatigue, "fatigue", NA)
+# insomnia
+nodes$contains_insomnia <- grepl("\\binsomnia\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect11 <- ifelse(nodes$contains_insomnia, "insomnia", NA)
+# anxiety
+nodes$contains_anxiety <- grepl("\\banxiety\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect12 <- ifelse(nodes$contains_anxiety, "anxiety", NA)
+# rash
+nodes$contains_rash <- grepl("\\brash\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect13 <- ifelse(nodes$contains_rash, "rash", NA)
+# muscle pain
+nodes$contains_muscle_pain <- grepl("\\bmuscle pain\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect14 <- ifelse(nodes$contains_muscle_pain, "muscle pain", NA)
+# allergic reaction
+nodes$contains_allergic_reaction <- grepl("\\ballergic reaction\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect15 <- ifelse(nodes$contains_allergic_reaction, "allergic reaction", NA)
+# difficult breathing
+nodes$contains_difficult_breathing <- grepl("\\bdifficult breathing\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect16 <- ifelse(nodes$contains_difficult_breathing, "difficult breathing", NA)
+# fever
+nodes$contains_fever <- grepl("\\bfever\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect17 <- ifelse(nodes$contains_fever, "fever", NA)
+# sweating
+nodes$contains_sweating <- grepl("\\bsweating\\b", nodes$side_effects, ignore.case = TRUE)
+nodes$sideEffect18 <- ifelse(nodes$contains_sweating, "sweating", NA)
+```
+
+```{r}
+nodes_filtered <- nodes %>%
+  select(
+    -medical_condition_url, 
+    -drug_link, 
+    -medical_condition_description, 
+    -related_drugs, 
+    -rx_otc, 
+    -pregnancy_category, 
+    -csa, 
+    -alcohol, 
+    -generic_name, 
+    -drug_classes, 
+    -brand_names,
+    -contains_hives, 
+    -contains_swelling, 
+    -contains_vomiting,
+    -contains_drowsiness,
+    -contains_dizziness,
+    -contains_diarrhea,
+    -contains_constipation,
+    -contains_blurred_vision,
+    -contains_fatigue,
+    -contains_insomnia,
+    -contains_anxiety,
+    -contains_rash,
+    -contains_muscle_pain,
+    -contains_allergic_reaction,
+    -contains_difficult_breathing,
+    -contains_fever,
+    -contains_sweating, 
+    -side_effects
+  )
+nodes_filtered
+```
+
+```{r}
+edges <- nodes_filtered %>%
+  select(medical_condition, starts_with("sideEffect")) %>% 
+  pivot_longer(cols = starts_with("sideEffect"), 
+               names_to = "side_effect_col", 
+               values_to = "side_effect") %>%
+  filter(!is.na(side_effect)) %>%
+  distinct(medical_condition, side_effect) 
+
+graph <- graph_from_data_frame(edges, directed = FALSE)
+
+node_sizes <- degree(graph)
+layout <- layout_on_grid(graph)
+
+par(mar = c(0, 0, 0, 0))
+
+plot(
+  graph,
+  layout = layout,     
+  vertex.size = node_sizes * 0.5,       
+  vertex.color = ifelse(V(graph)$name %in% edges$side_effect, "orange", "lightblue"),
+  vertex.frame.color = NA,                
+  vertex.label.cex = 1,                   
+  vertex.label.color = "black",                 
+  edge.color = "lightgrey",    
+  edge.width = 0.5,           
+)
+
+```
+
+```{r}
+in_degree <- degree(graph, mode = "in")
+
+max_in_degree <- max(in_degree)
+most_connected_side_effect <- V(graph)$name[which(in_degree == max_in_degree)]
+cat("The edges with the most incoming edges:",most_connected_side_effect,"\n") 
+cat("The degree is: ",max_in_degree)
+print('This means that 47 medical conditions with medication have the chance of giving you these side effects.')
+```
+
+```{r}
+drug_side_effects <- nodes_filtered %>%
+  select(medical_condition, starts_with("sideEffect"))
+
+long_format <- drug_side_effects %>%
+  pivot_longer(cols = starts_with("sideEffect"), 
+               names_to = "side_effect_col", 
+               values_to = "side_effect") %>%
+  filter(!is.na(side_effect)) 
+side_effect_counts <- long_format %>%
+  group_by(medical_condition, side_effect) %>%
+  summarise(drug_count = n(), .groups = "drop") # Count unique occurrences
+wide_format <- side_effect_counts %>%
+  pivot_wider(
+    names_from = side_effect,  
+    values_from = drug_count,  
+    values_fill = 0            
+  )
+
+wide_format
+```
+
+```{r}
+side_effect_totals <- side_effect_counts %>%
+  group_by(side_effect) %>%
+  summarise(total_drugs = sum(drug_count, na.rm = TRUE)) %>%
+  arrange(desc(total_drugs))
+
+side_effect_totals
+```
+
+```{r}
+swelling_edges <- nodes %>%
+  filter(contains_swelling == TRUE) %>%  
+  select(drug_name, contains_swelling)    
+
+swelling_edges <- swelling_edges %>%
+  mutate(side_effect = "swelling") %>%
+  select(side_effect, drug_name) 
+
+swelling_graph <- graph_from_data_frame(swelling_edges, directed = FALSE)
+
+vertex_sizes <- ifelse(V(swelling_graph)$name == "swelling", 30, 8)
+
+layout <- layout_on_sphere(swelling_graph)
+vertex_sizes <- ifelse(V(swelling_graph)$name == "swelling", 30, 3) 
+
+par(mar = c(0, 0, 0, 0))
+plot(
+  swelling_graph,
+  layout = layout,
+  vertex.size = vertex_sizes,           
+  vertex.color = ifelse(V(swelling_graph)$name == "swelling", "orange", "lightblue"),
+  vertex.label = NA,                    
+  edge.color = "gray",                 
+  edge.width = 0.3,                     
+)
+
+```
+
+```{r}
+swelling_edges <- nodes %>%
+  filter(contains_fatigue == TRUE) %>%  
+  select(drug_name, contains_fatigue)      
+
+swelling_edges <- swelling_edges %>%
+  mutate(side_effect = "fatigue") %>%  
+  select(side_effect, drug_name)            
+
+swelling_graph <- graph_from_data_frame(swelling_edges, directed = FALSE)
+
+vertex_sizes <- ifelse(V(swelling_graph)$name == "fatigue", 30, 8)
+
+layout <- layout_on_sphere(swelling_graph)
+vertex_sizes <- ifelse(V(swelling_graph)$name == "fatigue", 30, 3) 
+
+par(mar = c(0, 0, 0, 0))
+plot(
+  swelling_graph,
+  layout = layout,
+  vertex.size = vertex_sizes,           
+  vertex.color = ifelse(V(swelling_graph)$name == "fatigue", "orange", "lightblue"),
+  vertex.label = NA,                    
+  edge.color = "gray",                 
+  edge.width = 0.3,                     
+)
+```
+
+```{r}
+nodes_filtered$activity <- as.numeric(gsub("%", "", nodes_filtered$activity))
+
+filtered_data <- nodes_filtered %>%
+  mutate(
+    weighted_score = rating * log(1 + no_of_reviews)
+  )
+
+ranked_drugs <- filtered_data %>%
+  arrange(desc(weighted_score)) %>%
+  select(drug_name, medical_condition, activity, rating, no_of_reviews, weighted_score)
+
+top_drugs <- ranked_drugs %>% head(10)
+print(top_drugs)
+
+ggplot(top_drugs, aes(x = reorder(drug_name, weighted_score), y = weighted_score, fill = medical_condition)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(
+    title = "Top 10 Drugs by Weighted Effectiveness Score",
+    x = "Drug Name",
+    y = "Weighted Score"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),   # Increase title size
+    axis.title.x = element_text(size = 14),               # Increase x-axis label size
+    axis.title.y = element_text(size = 14),               # Increase y-axis label size
+    axis.text = element_text(size = 12),                  # Increase axis text size
+    legend.title = element_text(size = 14),               # Increase legend title size
+    legend.text = element_text(size = 12)                 # Increase legend text size
+  )
+
+```
+```{r}
+top_drug_by_condition <- filtered_data %>%
+  group_by(medical_condition) %>%
+  filter(weighted_score == max(weighted_score, na.rm = TRUE)) %>%
+  arrange(desc(weighted_score)) %>%
+  select(medical_condition, drug_name, activity, rating, no_of_reviews, weighted_score)
+
+print(top_drug_by_condition)
+
+write.csv(top_drug_by_condition, "top_drug_by_condition.csv", row.names = FALSE)
+```
