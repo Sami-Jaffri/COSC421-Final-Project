@@ -4,9 +4,8 @@ library(tidyverse)
 ```
 
 ```{r}
-nodes1 <- read.csv("your_path_to_drugs_side_effects_csv_file", header = TRUE)
-
-nodes <- nodes1[nodes1$activity != '0%', ]
+nodes1 <- read.csv("change path to: drugs_side_effects_drugs_com.csv", header = TRUE)
+nodes <- nodes1
 nodes
 #hives
 nodes$contains_hives <- grepl("\\bhives\\b", nodes$side_effects, ignore.case = TRUE)
@@ -165,7 +164,18 @@ side_effect_totals <- side_effect_counts %>%
   summarise(total_drugs = sum(drug_count, na.rm = TRUE)) %>%
   arrange(desc(total_drugs))
 
-side_effect_totals
+ggplot(data = side_effect_totals, aes(x = reorder(side_effect, total_drugs), y = total_drugs)) +
+  geom_bar(stat = "identity", fill = "skyblue") +
+  coord_flip() + # Flips the coordinates to make it easier to read
+  labs(title = "Total Drugs by Side Effect",
+       x = "Side Effect",
+       y = "Total Drugs") +
+  theme_minimal()
+mean_total <- mean(side_effect_totals$total_drugs)
+sd_total <- sd(side_effect_totals$total_drugs)
+mean_total
+sd_total
+
 ```
 
 ```{r}
@@ -230,7 +240,7 @@ nodes_filtered$activity <- as.numeric(gsub("%", "", nodes_filtered$activity))
 
 filtered_data <- nodes_filtered %>%
   mutate(
-    weighted_score = rating * log(1 + no_of_reviews)
+    weighted_score = rating^2 * log(1 + no_of_reviews)
   )
 
 ranked_drugs <- filtered_data %>%
@@ -250,12 +260,12 @@ ggplot(top_drugs, aes(x = reorder(drug_name, weighted_score), y = weighted_score
   ) +
   theme_minimal() +
   theme(
-    plot.title = element_text(size = 16, face = "bold"),   # Increase title size
-    axis.title.x = element_text(size = 14),               # Increase x-axis label size
-    axis.title.y = element_text(size = 14),               # Increase y-axis label size
-    axis.text = element_text(size = 12),                  # Increase axis text size
-    legend.title = element_text(size = 14),               # Increase legend title size
-    legend.text = element_text(size = 12)                 # Increase legend text size
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    axis.text = element_text(size = 12),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 12)
   )
 
 ```
@@ -266,7 +276,46 @@ top_drug_by_condition <- filtered_data %>%
   arrange(desc(weighted_score)) %>%
   select(medical_condition, drug_name, activity, rating, no_of_reviews, weighted_score)
 
-print(top_drug_by_condition)
+head(top_drug_by_condition,10)
 
-write.csv(top_drug_by_condition, "top_drug_by_condition.csv", row.names = FALSE)
+```
+```{r}
+ggplot(top_drug_by_condition, aes(x = activity, y = weighted_score)) +
+  geom_point(color = "blue", size = 3) + # Scatter plot
+  labs(
+    title = "Activity vs Weighted Score of Drugs",
+    x = "Activity Level (Site Activity)",
+    y = "Weighted Score (Drug Effectiveness)"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    axis.text = element_text(size = 12)
+  )
+
+```
+
+```{r}
+correlation <- cor(top_drug_by_condition$activity, top_drug_by_condition$weighted_score)
+print(correlation)
+```
+
+```{r}
+mean_weighted_score <- mean(top_drug_by_condition$weighted_score)
+sd_weighted_score <- sd(top_drug_by_condition$weighted_score)
+
+mean_weighted_score
+sd_weighted_score
+
+```
+
+```{r}
+average_weighted_scores <- filtered_data %>%
+  group_by(medical_condition) %>%
+  summarise(average_weighted_score = mean(weighted_score, na.rm = TRUE)) %>%
+  arrange(desc(average_weighted_score))
+
+print(average_weighted_scores)
 ```
